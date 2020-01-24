@@ -1,0 +1,41 @@
+{
+  "name": "postcss-amplify-webpack-plugin",
+  "version": "1.0.0",
+  "description": "A Webpack plugin to generate a Google AMP optimized CSS file using postcss-amplify",
+  "keywords": [
+    "css",
+    "amp",
+    "google amp",
+    "accelerated mobile pages",
+    "amp-custom",
+    "media queries",
+    "important",
+    "prefixes",
+    "vendor prefixes",
+    "browser prefixes"
+  ],
+  "author": "Lauren Ashpole <lauren@laurenashpole.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurenashpole/postcss-amplify-webpack-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/laurenashpole/postcss-amplify-webpack-plugin/issues"
+  },
+  "homepage": "https://github.com/laurenashpole/postcss-amplify-webpack-plugin#readme",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "postcss": "^7.0.26",
+    "postcss-amplify": "0.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
+}
