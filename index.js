@@ -31,9 +31,13 @@ class PostcssAmplifyWebpackPlugin {
         ])
           .process(content.toString(), { from: undefined })
           .then(result => {
-            // todo: create file if doesn't exist
-            fs.writeFileSync(`${outputPath}/${ampFilename}`, result.css);
-            callback();
+            fs.mkdir(outputPath, { recursive: true }, err => {
+              if (!err) {
+                fs.writeFileSync(`${outputPath}/${ampFilename}`, result.css);
+              }
+
+              callback();
+            });
           });
       }
     );
