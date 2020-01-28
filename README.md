@@ -1,6 +1,15 @@
 # postcss-amplify-webpack-plugin
 
-A Webpack plugin to generate a Google AMP optimized CSS file using [postcss-amplify](https://github.com/laurenashpole/postcss-amplify).
+[![Travis][build-badge]][build]
+[![npm package][npm-badge]][npm]
+
+[build-badge]: https://travis-ci.org/laurenashpole/postcss-amplify-webpack-plugin.svg?branch=master
+[build]: https://travis-ci.org/laurenashpole/postcss-amplify-webpack-plugin
+
+[npm-badge]: http://img.shields.io/npm/v/postcss-amplify-webpack-plugin.svg?style=flat
+[npm]: https://www.npmjs.com/package/postcss-amplify-webpack-plugin
+
+A [Webpack](https://webpack.js.org/) plugin to generate a Google AMP optimized CSS file using [postcss-amplify](https://github.com/laurenashpole/postcss-amplify).
 
 For every CSS file that is compiled through Webpack, this plugin uses postcss-amplify to filter out:
 
@@ -10,7 +19,7 @@ For every CSS file that is compiled through Webpack, this plugin uses postcss-am
 - `!important` flags
 - `-amp` classes or `i-amp` tags
 
-and generate a new file the format `FILENAME.amp.css`.
+and generate a new file with the format `FILENAME.amp.css`.
 
 ## Installation
 
@@ -47,13 +56,13 @@ module.exports = {
 
 **options.excludedBlocks** (string or array) List of class blocks or prefixes to exclude. Do not include the `.`.
 
-**options.outputPath** (string) Directory for the new files. This should be relative to the app base. Defaults to the path specified for `output.path` in the Webpack config.
+**options.outputPath** (string) Directory for the new files. This should be an absolute path and defaults to the setting for `output.path` in the Webpack config.
 
 **options.excludedFiles** (RegExp or array) List of files to exclude. This option behaves the same as other Webpack `exclude` conditions.
 
 ## Issues
 
-If you run into any issues with the plugin or the underlying CSS parsing, please submit an [issue](https://github.com/laurenashpole/postcss-amplify-webpack-plugin/issues).
+My Webpack configs tend to be on the simpler side so it's possible there are some build variations I haven't considered. If you run into any issues with the plugin or the underlying CSS parsing, please submit an [issue](https://github.com/laurenashpole/postcss-amplify-webpack-plugin/issues).
 
 ## License
 

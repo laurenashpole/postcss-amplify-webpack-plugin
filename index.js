@@ -24,14 +24,7 @@ class PostcssAmplifyWebpackPlugin {
             }
 
             const ampFilename = this.getAmpFilename(filename);
-
-            outputPath = path.join(
-              path.relative(
-                compilation.options.context,
-                this.options.outputPath || outputPath
-              ),
-              ampFilename
-            );
+            outputPath = this.getOutputPath(compilation, ampFilename);
 
             postcss([
               postcssAmplify({
@@ -61,7 +54,25 @@ class PostcssAmplifyWebpackPlugin {
   }
 
   getAmpFilename(filename) {
-    return filename.replace(/\.css$/, '.amp.css');
+    if (this.options.outputPath) {
+      return filename
+        .split('/')
+        .pop()
+        .replace(/\.css$/, '.amp.css');
+    } else {
+      return filename.replace(/\.css$/, '.amp.css');
+    }
+  }
+
+  getOutputPath(compilation, ampFilename) {
+    if (!this.options.outputPath) {
+      return ampFilename;
+    }
+
+    return path.join(
+      path.relative(compilation.options.context, this.options.outputPath),
+      ampFilename
+    );
   }
 
   isExcluded(file) {

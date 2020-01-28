@@ -61,7 +61,9 @@ describe('Write files', () => {
   });
 
   it('writes new files to output path if defined', () => {
-    return compile({ outputPath: 'lib' }).then(memfs => {
+    return compile({
+      outputPath: path.resolve(__dirname, '../lib')
+    }).then(memfs => {
       const cssExists = memfs.existsSync(
         path.join(path.resolve(__dirname, 'lib'), 'file1.amp.css')
       );
