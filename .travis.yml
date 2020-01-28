@@ -1,0 +1,28 @@
+language: node_js
+
+cache:
+  directories:
+    - "node_modules"
+
+node_js:
+  - node
+  - "10"
+  - "8"
+
+branches:
+  only:
+    - master
+
+notifications:
+  email: false
+
+jobs:
+  include:
+    - stage: test
+      script: npm test
+    - stage: npm release
+      if: branch = master
+      node_js: "stable"
+      script: npm run semantic-release
+      on:
+        node: "10"

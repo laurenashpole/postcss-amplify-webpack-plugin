@@ -1,0 +1,7 @@
+.jest-*
+tests/
+jest.config.js
+.eslintrc.js
+.travis.yml
+node_modules
+**/.DS_Store
