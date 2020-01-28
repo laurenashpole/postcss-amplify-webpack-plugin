@@ -6,7 +6,8 @@ exports.getConfig = function(pluginOptions = {}) {
   return {
     entry: {
       file1: '../fixtures/file1.js',
-      file2: '../fixtures/file2.js'
+      file2: '../fixtures/file2.js',
+      file3: '../fixtures/file3.js'
     },
     context: __dirname,
     output: {

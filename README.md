@@ -34,10 +34,10 @@ Add the plugin to your Webpack config:
 const PostcssAmplifyWebpackPlugin = require('postcss-amplify-webpack-plugin');
 
 module.exports = {
-    ...
-    plugins: [
-      new PostcssAmplifyWebpackPlugin(options)
-    ]
+  ...
+  plugins: [
+    new PostcssAmplifyWebpackPlugin(options)
+  ]
 };
 ```
 
@@ -47,7 +47,7 @@ module.exports = {
 
 **options.excludedBlocks** (string or array) List of class blocks or prefixes to exclude. Do not include the `.`.
 
-**options.outputPath** (string) Directory for the new files. Defaults to the path specified for `output.path` in the Webpack config.
+**options.outputPath** (string) Directory for the new files. This should be relative to the app base. Defaults to the path specified for `output.path` in the Webpack config.
 
 **options.excludedFiles** (RegExp or array) List of files to exclude. This option behaves the same as other Webpack `exclude` conditions.
 

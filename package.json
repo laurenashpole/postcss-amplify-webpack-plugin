@@ -26,7 +26,8 @@
   "homepage": "https://github.com/laurenashpole/postcss-amplify-webpack-plugin#readme",
   "main": "index.js",
   "scripts": {
-    "test": "jest && eslint ."
+    "test": "jest --detectOpenHandles && eslint .",
+    "coverage": "jest --coverage"
   },
   "jest": {
     "testEnvironment": "node"
