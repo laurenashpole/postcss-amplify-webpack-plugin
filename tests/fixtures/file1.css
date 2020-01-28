@@ -1,0 +1,33 @@
+body {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+}
+
+.heading {
+  color: #000 !important;
+}
+
+.menu {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.-amp-image {
+  width: 300px;
+}
+
+.sidebar {
+  background: #f1f1f1;
+}
+
+.sidebar__heading {
+  font-size: 20px;
+}

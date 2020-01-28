@@ -1,4 +1,4 @@
-const fs = require('fs');
+const path = require('path');
 const postcss = require('postcss');
 const postcssAmplify = require('postcss-amplify');
 
@@ -8,44 +8,60 @@ class PostcssAmplifyWebpackPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.assetEmitted.tapAsync(
+    compiler.hooks.emit.tapAsync(
       'PostcssAmplifyWebpackPlugin',
-      (file, content, callback) => {
-        if (!file.endsWith('.css')) {
-          return callback();
-        }
+      (compilation, callback) => {
+        compilation.chunks.forEach(chunk => {
+          chunk.files.forEach(filename => {
+            let outputPath = compilation.options.output.path;
 
-        if (this.isExcluded(file)) {
-          return callback();
-        }
+            if (!filename.endsWith('.css')) {
+              return callback();
+            }
 
-        const outputPath =
-          this.options.outputPath || compiler.options.output.path;
-        const ampFilename = this.getAmpFilename(file);
+            if (this.isExcluded(`${outputPath}/${filename}`)) {
+              return callback();
+            }
 
-        postcss([
-          postcssAmplify({
-            excludedBlocks: this.options.excludedBlocks || [],
-            maxBreakpoint: this.options.maxBreakpoint || '0px'
-          })
-        ])
-          .process(content.toString(), { from: undefined })
-          .then(result => {
-            fs.mkdir(outputPath, { recursive: true }, err => {
-              if (!err) {
-                fs.writeFileSync(`${outputPath}/${ampFilename}`, result.css);
-              }
+            const ampFilename = this.getAmpFilename(filename);
 
-              callback();
-            });
+            outputPath = path.join(
+              path.relative(
+                compilation.options.context,
+                this.options.outputPath || outputPath
+              ),
+              ampFilename
+            );
+
+            postcss([
+              postcssAmplify({
+                excludedBlocks: this.options.excludedBlocks || [],
+                maxBreakpoint: this.options.maxBreakpoint || '0px'
+              })
+            ])
+              .process(compilation.assets[filename].source(), {
+                from: undefined
+              })
+              .then(result => {
+                compilation.assets[outputPath] = {
+                  source: () => {
+                    return result.css;
+                  },
+                  size: () => {
+                    return result.css.length;
+                  }
+                };
+
+                callback();
+              });
           });
+        });
       }
     );
   }
 
-  getAmpFilename(file) {
-    const filename = file.match(/(?<=(\/|\n))(.*)(?=\.css)/)[0];
-    return `${filename}.amp.css`;
+  getAmpFilename(filename) {
+    return filename.replace(/\.css$/, '.amp.css');
   }
 
   isExcluded(file) {
@@ -56,6 +72,7 @@ class PostcssAmplifyWebpackPlugin {
     const excludedFiles = Array.isArray(this.options.excludedFiles)
       ? this.options.excludedFiles
       : [this.options.excludedFiles];
+
     return excludedFiles.filter(excludedFile => file.match(excludedFile))
       .length;
   }

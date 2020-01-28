@@ -26,16 +26,28 @@
   "homepage": "https://github.com/laurenashpole/postcss-amplify-webpack-plugin#readme",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint ."
+    "test": "jest && eslint ."
+  },
+  "jest": {
+    "testEnvironment": "node"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   },
   "dependencies": {
     "postcss": "^7.0.26",
     "postcss-amplify": "0.0.1"
   },
   "devDependencies": {
+    "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-jest": "^23.6.0",
     "eslint-plugin-prettier": "^3.1.2",
-    "prettier": "^1.19.1"
+    "jest": "^25.1.0",
+    "memory-fs": "^0.5.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "prettier": "^1.19.1",
+    "webpack": "^4.41.5"
   }
 }
