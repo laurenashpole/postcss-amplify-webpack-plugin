@@ -37,7 +37,7 @@
     "node": ">=8.0.0"
   },
   "dependencies": {
-    "postcss": "^7.0.26",
+    "postcss": "^8.2.10",
     "postcss-amplify": "0.0.1"
   },
   "devDependencies": {
